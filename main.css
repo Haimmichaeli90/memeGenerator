@@ -1,51 +1,58 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color:#333
 }
 
 header {
     background-color: #333;
     color: white;
-    padding: 1rem;
+    /* padding: 0.25rem 0.5rem; */
+    font-size: 0.875rem; 
+    line-height: 1.1; 
+    border-radius: 10px; 
+    max-width: 80%; 
+    margin: 0 auto; 
+    text-align: center; 
 }
-
 main {
     display: flex;
     justify-content: space-around;
     padding: 2rem;
 }
 
-#image-gallery {
+.image-gallery {
+    width: 35%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+.meme-editor {
     width: 45%;
     border: 1px solid #ccc;
     padding: 1rem;
 }
 
-#meme-editor {
-    width: 45%;
-    border: 1px solid #ccc;
-    padding: 1rem;
-}
-
-canvas {
+.meme-canvas {
     display: block;
     margin: 1rem auto;
     border: 1px solid #ccc;
+    /* max-width: 70%; */
 }
 
-input[type="text"] {
+.meme-text {
     display: block;
     margin: 1rem auto;
     padding: 0.5rem;
     width: 80%;
 }
 
-input[type="color"] {
+.text-color {
     display: block;
     margin: 1rem auto;
 }
 
-a#download-link {
+.download-link {
     display: block;
     margin: 1rem auto;
     padding: 0.5rem 1rem;
@@ -53,3 +60,88 @@ a#download-link {
     color: white;
     text-decoration: none;
 }
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+    justify-content: center; 
+}
+
+.image-gallery img {
+    max-width: 97%;
+    height: auto;
+    flex: 1 1 calc(33.333% - 10px); 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s ease; 
+}
+
+.image-gallery img:hover {
+    transform: scale(1.05); 
+}
+
+.main-header {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20px minmax(260px, 1fr) 20px;
+
+    grid-column: 1/-1;
+    background-image: var(--clr-grad);
+    margin-bottom: 10px;
+}
+
+.main-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    grid-column: 2;
+    height: 70px;
+}
+
+.main-header .logo {
+    margin-inline-start: 10px;
+    font-size: 1.8em;
+}
+
+.main-nav-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+}
+
+.main-nav-list li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+.nav-btn {
+    border: none;
+    background-color: transparent;
+    height: 100px;
+    width: 200px;
+    border-bottom: 5px solid transparent;
+    font-size: 1.3em;
+    color: var(--clr--4);
+}
+
+.nav-btn:hover {
+    color: var(--clr-1);
+    font-size: 1.5em;
+}
+
+.hamburger-btn {
+    background-color: transparent;
+    border: none;
+    
+    color: white;
+    scale: 2;
+    margin-inline-end: 10px;
+}
+
+.active {
+    color: var(--clr-1);
+    font-weight: bold;
+}
+

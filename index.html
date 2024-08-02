@@ -6,21 +6,33 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
-    <header>
-        <h1>Meme Generator</h1>
+<body onload="onInit()">
+    <header class="main-header">
+        <div class="main-header-content">
+            <h1 class="logo">Meme Gen</h1>
+            <nav class="main-nav">
+                <ul class="main-nav-list">
+                    <li><button class="nav-btn gallery-btn">Gallery</button></li>
+                    <li><button class="nav-btn rand-btn">Randomize</button></li>
+                    <li><button class="nav-btn saved-btn">Saved</button></li>
+                </ul>
+            </nav>
+        </div>
     </header>
     <main>
-        <section id="image-gallery">
-        
+        <section class="image-gallery">
+
         </section>
-        <section id="meme-editor">
-            <canvas id="meme-canvas"></canvas>
-            <input type="text" id="meme-text" placeholder="Enter your text">
-            <input type="color" id="text-color">
-            <a id="download-link" href="#">Download Meme</a>
+        <section class="meme-editor">
+            <canvas class="meme-canvas"></canvas>
+            <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
+            <input type="color" class="text-color" onchange="handleColorChange()">
+            <a class="download-link" href="#">Download Meme</a>
         </section>
     </main>
     <script src="main.js"></script>
+    <script src="Service/memeService.js"></script>
+    <script src="Controller/memeController.js"></script>
+    <script src="Controller/galleryController.js"></script>
 </body>
 </html>
