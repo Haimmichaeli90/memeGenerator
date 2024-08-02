@@ -27,6 +27,8 @@ function setLineTxt(txt){
     meme.lines[meme.selectedLineIdx].txt = txt
 }
 
+
+
 function setLineColor(color) {
     const meme = getMeme()
     meme.lines[meme.selectedLineIdx].color = color

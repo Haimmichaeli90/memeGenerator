@@ -1,35 +1,35 @@
-'use strict'
 
 function renderMeme() {
-    const canvas = document.querySelector('.meme-canvas')
-    if (!canvas) {
-        alert('Canvas not found')
+    const gallery = document.querySelector('.image-gallery')
+    if (!gallery) {
+        alert('Gallery not found')
         return
     }
-    const ctx = canvas.getContext('2d')
-    
-    const meme = getMeme()
-    
-    const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
 
+    const meme = getMeme()
+    const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
+    
     if (!selectedImg) {
         alert('Selected image not found')
         return
     }
 
-    const img = new Image()
-    img.src = selectedImg.url
+    const imgHtml = `
+        <div style="position: relative; display: inline-block;">
+            <img src="${selectedImg.url}" style="display: block;">
+            <div style="
+                position: absolute; 
+                left: 50%; 
+                top: 50%; 
+                transform: translate(-50%, -50%); 
+                font-size: ${meme.lines[meme.selectedLineIdx].size}px; 
+                color: ${meme.lines[meme.selectedLineIdx].color}; 
+                text-align: center;
+            ">
+                ${meme.lines[meme.selectedLineIdx].txt}
+            </div>
+        </div>
+    `
 
-    img.onload = () => {
-        canvas.width = img.width
-        canvas.height = img.height
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-        const line = meme.lines[meme.selectedLineIdx]
-        ctx.font = `${line.size}px Arial`
-        ctx.fillStyle = line.color
-        ctx.textAlign = 'center'
-        ctx.fillText(line.txt, canvas.width / 2, canvas.height / 2)
-    };
-
+    gallery.innerHTML = imgHtml
 }
