@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+#image-gallery {
+    width: 45%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+#meme-editor {
+    width: 45%;
+    border: 1px solid #ccc;
+    padding: 1rem;
+}
+
+canvas {
+    display: block;
+    margin: 1rem auto;
+    border: 1px solid #ccc;
+}
+
+input[type="text"] {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    width: 80%;
+}
+
+input[type="color"] {
+    display: block;
+    margin: 1rem auto;
+}
+
+a#download-link {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+}
