@@ -33,8 +33,19 @@
 
             
             <section class="font-size-controls">
-                <button class="font-size-btn" onclick="changeFontSize('decrease')">A -</button>
-                <button class="font-size-btn" onclick="changeFontSize('increase')">A +</button>
+                <button class="font-size-btn-dcr" onclick="changeFontSize('decrease')">A -</button>
+                <button class="font-size-btn-inr" onclick="changeFontSize('increase')">A +</button>
+                <button class="text-align-btn-left" onclick="changeTextAlign('left')">
+                    <img src="icon/left.png" alt="Align Left">
+                </button>
+                
+                <button class="text-align-btn-center" onclick="changeTextAlign('center')">
+                    <img src="icon/align-center.png" alt="Align Center">
+                </button>
+                
+                <button class="text-align-btn-right" onclick="changeTextAlign('right')">
+                    <img src="icon/align-right.png" alt="Align Right">
+                </button>
             </section>
             
             <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">

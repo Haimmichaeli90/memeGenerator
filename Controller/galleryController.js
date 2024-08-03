@@ -7,14 +7,16 @@ function getImgs() {
 
 function renderGallery() {
     const imgs = getImgs()
-
+    const elGalleryContainer = document.querySelector('.image-gallery')
+    
     const strHtmls = imgs.map(img => `
-        <img src="${img.url}" onclick="onImgSelect(${img.id})" alt="Meme Image">
+        <img src="${img.url}" data-id="${img.id}" alt="Meme Image">
     `).join('')
 
-    const elGalleryContainer = document.querySelector('.image-gallery')
-    if (elGalleryContainer) {
-        elGalleryContainer.innerHTML = strHtmls
+    elGalleryContainer.innerHTML = strHtmls
+
+    if (imgs.length > 0) {
+        onImgSelect(imgs[0].id)
     }
 }
 

@@ -22,6 +22,10 @@ function getMeme() {
     return gMeme
 }
 
+function setMeme(updatedMeme) {
+    gMeme = updatedMeme
+}
+
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
