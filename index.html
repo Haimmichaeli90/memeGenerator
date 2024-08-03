@@ -23,14 +23,26 @@
         </div>
     </header>
     <main>
+  
         
         <section class="image-gallery">
         </section>
+        
         <section class="meme-editor">
+            <button class="add-line-btn" onclick="addLine()">+</button>
+
+            
+            <section class="font-size-controls">
+                <button class="font-size-btn" onclick="changeFontSize('decrease')">A -</button>
+                <button class="font-size-btn" onclick="changeFontSize('increase')">A +</button>
+            </section>
+            
             <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
             <input type="color" class="text-color" onchange="handleColorChange()">
             <a class="download-link" href="#" onclick="downloadMeme()">Download</a>
+            
         </section>
+
     </main>
     <script src="main.js"></script>
     <script src="Service/memeService.js"></script>

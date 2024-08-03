@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color:#333
+    /* background-color:#333 */
 }
 
 header {
@@ -232,4 +232,34 @@ main {
         font-size: 1.125rem;
         padding: 1.25rem;
     }
+}
+
+.font-size-controls {
+    margin-top: 10px; /* Adjust spacing as needed */
+    display: flex; /* Align buttons side by side */
+    gap: 0; /* No space between buttons */
+    align-items: center; /* Vertically center buttons if needed */
+    height: 45%;
+    width: 90%;
+    margin-left: 40px;
+    background-color: #138098;
+    border-radius: 30px;
+}
+
+.font-size-btn {
+    padding: 5px 10px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer; /* Add pointer cursor on hover */
+    flex-shrink: 0; /* Prevent button from shrinking */
+    /* margin: 0; */
+    margin-left: 10px;
+    border: none;
+    /* Optional: Add a background color and border if desired */
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    
+}
+
+.font-size-btn:hover {
+    background-color: #555;
 }

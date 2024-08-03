@@ -9,7 +9,12 @@ var gMeme = {
             txt: 'I sometimes eat Falafel',
             size: 20,
             color: 'red'
-        }
+        },
+        // {
+        //     txt: 'Do I Look Pretty Today?',
+        //     size:20,
+        //     color:'blue '
+        // }
     ]
 }
 
