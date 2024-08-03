@@ -15,23 +15,6 @@ function onInit() {
 
 
 
-function handleTextInput() {
-    const textInput = document.querySelector('.meme-text')
-    if (textInput) {
-        const newText = textInput.value
-        setLineTxt(newText)
-        renderMeme()
-    }
-}
-
-function handleColorChange() {
-    const colorInput = document.querySelector('.text-color')
-    if (colorInput) {
-        const newColor = colorInput.value
-        setLineColor(newColor)
-        renderMeme()
-    }
-}
 
 
 

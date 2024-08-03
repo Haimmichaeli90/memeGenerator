@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 <body onload="onInit()">
     <header class="main-header">
@@ -27,7 +29,7 @@
         <section class="meme-editor">
             <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
             <input type="color" class="text-color" onchange="handleColorChange()">
-            <a class="download-link" href="#">Download Meme</a>
+            <a class="download-link" href="#" onclick="downloadMeme()">Download</a>
         </section>
     </main>
     <script src="main.js"></script>

@@ -1,3 +1,4 @@
+'use strict'
 
 function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
@@ -32,4 +33,33 @@ function renderMeme() {
     `
 
     gallery.innerHTML = imgHtml
+}
+
+function handleTextInput() {
+    const textInput = document.querySelector('.meme-text')
+    if (textInput) {
+        const newText = textInput.value
+        setLineTxt(newText)
+        renderMeme()
+    }
+}
+
+function handleColorChange() {
+    const colorInput = document.querySelector('.text-color')
+    if (colorInput) {
+        const newColor = colorInput.value
+        setLineColor(newColor)
+        renderMeme()
+    }
+}
+
+function downloadMeme() {
+    const elGalleryContainer = document.querySelector('.image-gallery')
+
+    html2canvas(elGalleryContainer).then(function(canvas) {
+        const link = document.createElement('a')
+        link.download = 'meme.png'
+        link.href = canvas.toDataURL('image/png')
+        link.click()
+    })
 }
