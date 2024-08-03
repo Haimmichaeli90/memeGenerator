@@ -19,6 +19,8 @@ main {
     display: flex;
     justify-content: space-around;
     padding: 2rem;
+    width: 70%;
+    margin-left: 10%;
 }
 
 .image-gallery {
@@ -27,10 +29,50 @@ main {
     padding: 1rem;
 }
 
+.button-controls {
+    display: flex; /* Use flexbox to align items horizontally */
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 10px; /* Add some space between buttons */
+    margin: 1rem 0; /* Add some vertical margin */
+}
+
+.add-line-btn,
+.next-line-btn,
+.delete-line-btn{
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Show a pointer cursor on hover */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox to center the icon */
+    align-items: center; /* Center the icon vertically */
+}
+
+.add-line-icon,
+.next-line-icon,
+.delete-line-icon{
+    width: 24px; /* Set a fixed width for the icons */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below the icon */
+}
+
+.add-line-btn:hover, .next-line-btn:hover {
+    opacity: 0.8; /* Add a slight transparency on hover */
+    transition: opacity 0.3s; /* Smooth transition */
+}
+
+.add-line-btn:focus, .next-line-btn:focus {
+    outline: none; /* Remove default focus outline */
+}
+.delete-line-btn:hover .delete-line-icon {
+    /* Optional: add hover effect */
+    filter: brightness(0.8);
+}
+
 .meme-editor {
-    width: 45%;
+    position: relative; /* Ensure it's positioned relative to its parent */
+    padding: 1rem; /* Adjust as needed */
     border: 1px solid #ccc;
-    padding: 1rem;
+    overflow: hidden; /* Ensure content stays within bounds */
 }
 
 .meme-canvas {
@@ -44,22 +86,30 @@ main {
     display: block;
     margin: 1rem auto;
     padding: 0.5rem;
-    width: 80%;
+    width: 30%;
 }
 
 .text-color {
     display: block;
     margin: 1rem auto;
 }
-
 .download-link {
-    display: block;
-    margin: 1rem auto;
+    display: inline-flex; /* Aligns the content properly */
+    align-items: center; /* Vertically center content */
     padding: 0.5rem 1rem;
-    background-color: #333;
-    color: white;
     text-decoration: none;
+    border-radius: 4px; /* Rounded corners for the link */
+    margin-top: 1rem; /* Space from other content */
 }
+
+
+.download-link img {
+    width: 60px; /* Increase icon size */
+    height: auto;
+    margin-left: 20rem; /* Increase space between icon and text */
+}
+
+
 .image-gallery {
     display: flex;
     flex-wrap: wrap;
@@ -177,6 +227,14 @@ main {
     }
     .main-nav-list {
         flex-direction: column;
+        align-items: center;
+    }
+    .main-nav-list li {
+        margin: 0.5rem 0;
+    }
+    .nav-btn {
+        width: 100%;
+        text-align: center;
     }
     main {
         flex-direction: column;
@@ -188,7 +246,6 @@ main {
         flex: 1 1 calc(100% - 10px);
     }
 }
-
 /* MEDIUM */
 @media (min-width: 720px) and (max-width: 1099px) {
     header {
@@ -197,6 +254,10 @@ main {
     }
     .main-nav-list {
         flex-direction: row;
+        justify-content: center;
+    }
+    .main-nav-list li {
+        margin: 0 0.5rem;
     }
     main {
         flex-direction: column;
@@ -217,7 +278,14 @@ main {
     }
     main {
         flex-direction: row;
-    }x
+    }
+    .main-nav-list {
+        flex-direction: row;
+        justify-content: center;
+    }
+    .main-nav-list li {
+        margin: 0 1rem;
+    }
     .image-gallery, .meme-editor {
         width: 45%;
     }
@@ -254,8 +322,8 @@ main {
     /* margin: 0; */
     margin-left: 10px;
     border: none;
-    height: 35%;
-    width: 8%;
+    height: 30.5%;
+    width: 7%;
     background-color: #f0f0f0;
     border-radius: 4px;
     

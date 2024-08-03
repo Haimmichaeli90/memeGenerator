@@ -1,5 +1,12 @@
 'use strict'
 
+
+function onInit() {
+    renderMeme()
+    renderGallery()
+}
+
+
 function handleTextInput() {
     const textInput = document.querySelector('.meme-text')
     if (textInput) {
@@ -31,7 +38,6 @@ function changeFontSize(action) {
     renderMeme()
 }
 
-
 function downloadMeme() {
     const elGalleryContainer = document.querySelector('.image-gallery')
 
@@ -43,6 +49,27 @@ function downloadMeme() {
     })
 }
 
+function nextLine() {
+    const meme = getMeme()
+    const linesCount = meme.lines.length
+
+    if (linesCount > 0) {
+        meme.selectedLineIdx = (meme.selectedLineIdx + 1) % linesCount
+        setMeme(meme)
+        renderMeme()
+        updateEditor()
+    }
+}
+
+function deleteLine() {
+    const meme = getMeme()
+    if (meme.lines.length === 0) return
+
+    meme.lines.splice(meme.selectedLineIdx, 1)
+    meme.selectedLineIdx = Math.max(0, meme.selectedLineIdx - 1)
+    setMeme(meme)
+    renderMeme()
+}
 
 
 function detectTextClick(x, y) {
@@ -61,19 +88,6 @@ function detectTextClick(x, y) {
     })
 }
 
-function updateEditor() {
-    const meme = getMeme()
-    const selectedLine = meme.lines[meme.selectedLineIdx]
-    
-    if (selectedLine) {
-        document.querySelector('.meme-text').value = selectedLine.txt
-    }
-}
-
-function handleLineClick(index) {
-    setActiveLine(index)
-    updateEditor()
-}
 
 function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
@@ -89,7 +103,8 @@ function renderMeme() {
             top: ${line.y || 50}%; 
             transform: translate(-50%, -50%); 
             font-size: ${line.size}px; 
-            color: ${line.color}; 
+            color: ${line.color};
+            font-family: ${line.fontFamily || 'Arial'}; 
             text-align: ${line.align || 'center'};
             white-space: nowrap;
             border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'};
@@ -154,3 +169,18 @@ function addLine() {
     setMeme(meme)
     renderMeme()
 }
+
+function updateEditor() {
+    const meme = getMeme()
+    const selectedLine = meme.lines[meme.selectedLineIdx]
+    
+    if (selectedLine) {
+        document.querySelector('.meme-text').value = selectedLine.txt
+    }
+}
+
+function handleLineClick(index) {
+    setActiveLine(index)
+    updateEditor()
+}
+

@@ -51,3 +51,10 @@ function setActiveLine(index) {
     setMeme(meme)
     renderMeme()
 }
+
+function setLineFontFamily(fontFamily) {
+    const meme = getMeme()
+    meme.lines[meme.selectedLineIdx].fontFamily = fontFamily
+    setMeme(meme)
+    renderMeme()
+}

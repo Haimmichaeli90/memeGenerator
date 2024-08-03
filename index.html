@@ -15,8 +15,8 @@
             <nav class="main-nav">
                 <ul class="main-nav-list">
                     <li><button class="nav-btn gallery-btn">Gallery</button></li>
-                    <li><button class="nav-btn rand-btn">Randomize</button></li>
                     <li><button class="nav-btn saved-btn">Saved</button></li>
+                    <li><button class="nav-btn rand-btn">Randomize</button></li>
                 </ul>
             </nav>
 
@@ -29,9 +29,20 @@
         </section>
         
         <section class="meme-editor">
-            <button class="add-line-btn" onclick="addLine()">+</button>
+            <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
 
-            
+            <section class="button-controls">
+                <button class="add-line-btn" onclick="addLine()">
+                    <img src="icon/plus.png" alt="Add Line Icon" class="add-line-icon">
+                </button>
+                <button class="next-line-btn" onclick="nextLine()">
+                    <img src="icon/transfer.png" alt="Next Line" class="next-line-icon">
+                </button>
+                <button class="delete-line-btn" onclick="deleteLine()">
+                    <img src="icon/delete.png" alt="Delete Line Icon" class="delete-line-icon">
+                </button>
+            </section>
+
             <section class="font-size-controls">
                 <button class="font-size-btn-dcr" onclick="changeFontSize('decrease')">A -</button>
                 <button class="font-size-btn-inr" onclick="changeFontSize('increase')">A +</button>
@@ -46,11 +57,22 @@
                 <button class="text-align-btn-right" onclick="changeTextAlign('right')">
                     <img src="icon/align-right.png" alt="Align Right">
                 </button>
+                <input type="color" class="text-color" onchange="handleColorChange()">
+
+                <select class="font-family" onchange="setLineFontFamily(this.value)">
+                    <option value="Ariel">Ariel</option>
+                    <option value="Impact">Impact</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
             </section>
             
-            <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
-            <input type="color" class="text-color" onchange="handleColorChange()">
-            <a class="download-link" href="#" onclick="downloadMeme()">Download</a>
+           
+            <a class="download-link" href="#" onclick="downloadMeme()">
+                <img src="icon/download.png" alt="Download Icon" class="download-icon">
+            </a>
             
         </section>
 
