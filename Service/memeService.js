@@ -8,13 +8,17 @@ var gMeme = {
         {
             txt: 'I sometimes eat Falafel',
             size: 20,
-            color: 'red'
+            color: 'red',
+            x: 50, 
+            y: 50  
         },
-        // {
-        //     txt: 'Do I Look Pretty Today?',
-        //     size:20,
-        //     color:'blue '
-        // }
+        {
+            txt: 'Do I Look Pretty Today?',
+            size:20,
+            color:'blue',
+            x: 50, 
+            y: 70  
+        }
     ]
 }
 
@@ -36,9 +40,14 @@ function setLineTxt(txt){
     meme.lines[meme.selectedLineIdx].txt = txt
 }
 
-
-
 function setLineColor(color) {
     const meme = getMeme()
     meme.lines[meme.selectedLineIdx].color = color
+}
+
+function setActiveLine(index) {
+    const meme = getMeme()
+    meme.selectedLineIdx = index
+    setMeme(meme)
+    renderMeme()
 }

@@ -44,6 +44,37 @@ function downloadMeme() {
 }
 
 
+
+function detectTextClick(x, y) {
+    const lines = document.querySelectorAll('.image-gallery div')
+
+    lines.forEach((lineElement, index) => {
+        const rect = lineElement.getBoundingClientRect()
+        if (
+            x >= rect.left &&
+            x <= rect.right &&
+            y >= rect.top &&
+            y <= rect.bottom
+        ) {
+            setActiveLine(index)
+        }
+    })
+}
+
+function updateEditor() {
+    const meme = getMeme()
+    const selectedLine = meme.lines[meme.selectedLineIdx]
+    
+    if (selectedLine) {
+        document.querySelector('.meme-text').value = selectedLine.txt
+    }
+}
+
+function handleLineClick(index) {
+    setActiveLine(index)
+    updateEditor()
+}
+
 function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
 
@@ -61,9 +92,9 @@ function renderMeme() {
             color: ${line.color}; 
             text-align: ${line.align || 'center'};
             white-space: nowrap;
-            border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'}
+            border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'};
             padding: 2px; 
-        ">
+        " onclick="handleLineClick(${index})">
             ${line.txt}
         </div>
     `).join('')
@@ -75,6 +106,14 @@ function renderMeme() {
         </div>
     `
     gallery.innerHTML = imgHtml
+
+    gallery.addEventListener('click', function(event) {
+        if (event.target.dataset.index) {
+            const x = event.clientX
+            const y = event.clientY
+            detectTextClick(x, y)
+        }
+    })
 }
 
 function addLine() {
@@ -89,6 +128,7 @@ function addLine() {
   
     meme.lines.push(newLine)
     meme.selectedLineIdx = meme.lines.length - 1
+    setMeme(meme)
     renderMeme()
   }
 
