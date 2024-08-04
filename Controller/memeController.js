@@ -1,9 +1,10 @@
 'use strict'
 
-// memeController.js
+
 function onInit() {
     renderMeme()
     renderGallery()    
+    generateRandomMeme()
 }
 
 function handleTextInput() {

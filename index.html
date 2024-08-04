@@ -14,7 +14,7 @@
             <h1 class="logo">Meme Gen</h1>
             <nav class="main-nav">
                 <ul class="main-nav-list">
-                    <li><button class="nav-btn gallery-btn">Gallery</button></li>
+                    <li><button class="nav-btn gallery-btn" onclick="onOpenGallery()">Gallery</button></li>
                     <li><button class="nav-btn saved-btn" onclick="onOpenSaved()">Saved</button></li>
                     <li><button class="nav-btn rand-btn" onclick="generateRandomMeme()">Randomize</button></li>
                 </ul>
@@ -22,6 +22,8 @@
         </div>
     </header>
     <button class="flex-btn" onclick="generateRandomMeme()">Flex</button>
+
+
     <main>
         <section class="image-gallery"></section> 
         <section class="meme-editor">
@@ -68,7 +70,7 @@
                 </a>
             </section>
             <!-- <div class="message-modal hidden">Saved Meme Successfully</div> -->
-        </section>       
+        </section>           
     </main>
     <section class="saved-page hidden">
         <section class="saved-container"></section>
