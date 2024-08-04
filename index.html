@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,6 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 </head>
 <body onload="onInit()">
     <header class="main-header">
@@ -15,22 +15,17 @@
             <nav class="main-nav">
                 <ul class="main-nav-list">
                     <li><button class="nav-btn gallery-btn">Gallery</button></li>
-                    <li><button class="nav-btn saved-btn">Saved</button></li>
-                    <li><button class="nav-btn rand-btn">Randomize</button></li>
+                    <li><button class="nav-btn saved-btn" onclick="onOpenSaved()">Saved</button></li>
+                    <li><button class="nav-btn rand-btn" onclick="generateRandomMeme()">Randomize</button></li>
                 </ul>
             </nav>
-
         </div>
     </header>
+    <button class="flex-btn" onclick="generateRandomMeme()">Flex</button>
     <main>
-  
-        
-        <section class="image-gallery">
-        </section>
-        
+        <section class="image-gallery"></section> 
         <section class="meme-editor">
             <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
-
             <section class="button-controls">
                 <button class="add-line-btn" onclick="addLine()">
                     <img src="icon/plus.png" alt="Add Line Icon" class="add-line-icon">
@@ -42,25 +37,21 @@
                     <img src="icon/delete.png" alt="Delete Line Icon" class="delete-line-icon">
                 </button>
             </section>
-
             <section class="font-size-controls">
                 <button class="font-size-btn-dcr" onclick="changeFontSize('decrease')">A -</button>
                 <button class="font-size-btn-inr" onclick="changeFontSize('increase')">A +</button>
                 <button class="text-align-btn-left" onclick="changeTextAlign('left')">
-                    <img src="icon/left.png" alt="Align Left">
+                    <img src="icon/align-to-left.png" alt="Align Left">
                 </button>
-                
                 <button class="text-align-btn-center" onclick="changeTextAlign('center')">
                     <img src="icon/align-center.png" alt="Align Center">
                 </button>
-                
                 <button class="text-align-btn-right" onclick="changeTextAlign('right')">
-                    <img src="icon/align-right.png" alt="Align Right">
+                    <img src="icon/align-to-right.png" alt="Align Right">
                 </button>
                 <input type="color" class="text-color" onchange="handleColorChange()">
-
                 <select class="font-family" onchange="setLineFontFamily(this.value)">
-                    <option value="Ariel">Ariel</option>
+                    <option value="Arial">Arial</option>
                     <option value="Impact">Impact</option>
                     <option value="Courier New">Courier New</option>
                     <option value="Georgia">Georgia</option>
@@ -68,18 +59,25 @@
                     <option value="Verdana">Verdana</option>
                 </select>
             </section>
-            
-           
-            <a class="download-link" href="#" onclick="downloadMeme()">
-                <img src="icon/download.png" alt="Download Icon" class="download-icon">
-            </a>
-            
-        </section>
-
+            <section class="download-save-section">
+                <a class="download-link" href="#" onclick="downloadMeme()">
+                    <img src="icon/download.png" alt="Download Icon" class="download-icon">
+                </a>
+                <a class="save-link" href="#" onclick="onSaveMeme()">
+                    <img src="icon/save.png" alt="Save Meme Icon" class="save-icon">
+                </a>
+            </section>
+            <!-- <div class="message-modal hidden">Saved Meme Successfully</div> -->
+        </section>       
     </main>
+    <section class="saved-page hidden">
+        <section class="saved-container"></section>
+    </section>
     <script src="main.js"></script>
     <script src="Service/memeService.js"></script>
+    <script src="Service/storageService.js"></script>
     <script src="Controller/memeController.js"></script>
     <script src="Controller/galleryController.js"></script>
+    <script src="Controller/savedController.js"></script>
 </body>
 </html>

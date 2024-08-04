@@ -1,11 +1,10 @@
 'use strict'
 
-
+// memeController.js
 function onInit() {
     renderMeme()
-    renderGallery()
+    renderGallery()    
 }
-
 
 function handleTextInput() {
     const textInput = document.querySelector('.meme-text')
@@ -88,16 +87,14 @@ function detectTextClick(x, y) {
     })
 }
 
-
 function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
 
     const meme = getMeme()
     const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
-    
 
     const linesHtml = meme.lines.map((line, index) => `
-        <div style="
+        <div data-index="${index}" style="
             position: absolute; 
             left: ${line.x || 50}%; 
             top: ${line.y || 50}%; 
@@ -109,7 +106,7 @@ function renderMeme() {
             white-space: nowrap;
             border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'};
             padding: 2px; 
-        " onclick="handleLineClick(${index})">
+        ">
             ${line.txt}
         </div>
     `).join('')
@@ -123,10 +120,10 @@ function renderMeme() {
     gallery.innerHTML = imgHtml
 
     gallery.addEventListener('click', function(event) {
-        if (event.target.dataset.index) {
-            const x = event.clientX
-            const y = event.clientY
-            detectTextClick(x, y)
+        const index = event.target.dataset.index
+        if (index) {
+            setActiveLine(Number(index))
+            updateEditor()
         }
     })
 }
@@ -145,7 +142,7 @@ function addLine() {
     meme.selectedLineIdx = meme.lines.length - 1
     setMeme(meme)
     renderMeme()
-  }
+}
 
   function changeTextAlign(alignment) {
 
@@ -182,5 +179,27 @@ function updateEditor() {
 function handleLineClick(index) {
     setActiveLine(index)
     updateEditor()
+}
+
+function generateRandomMeme() {
+    const randomImg = gImgs[Math.floor(Math.random() * gImgs.length)]
+    const newMeme = {
+        selectedImgId: randomImg.id,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'Your text here',
+                size: 20,             
+                color: 'black',       
+                x: 50,                
+                y: 50,                
+                fontFamily: 'Arial', 
+                align: 'center'     
+            }
+        ]
+    }
+    setMeme(newMeme)
+    renderMeme()
+    switchToEditor()
 }
 

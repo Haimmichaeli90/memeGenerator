@@ -14,8 +14,8 @@ var gMeme = {
         },
         {
             txt: 'Do I Look Pretty Today?',
-            size:20,
-            color:'blue',
+            size: 20,
+            color: 'blue',
             x: 50, 
             y: 70  
         }
@@ -57,4 +57,8 @@ function setLineFontFamily(fontFamily) {
     meme.lines[meme.selectedLineIdx].fontFamily = fontFamily
     setMeme(meme)
     renderMeme()
+}
+
+function getSavedMemes() {
+    return loadFromStorage('savedMemes') || []
 }
