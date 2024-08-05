@@ -1,10 +1,20 @@
 'use strict'
 
+let gElCanvas
+let gCtx
 
 function onInit() {
+    gElCanvas = document.getElementById('my-canvas')
+    gCtx = gElCanvas.getContext('2d')
+    resizeCanvas()
     renderMeme()
-    renderGallery()    
+    renderGallery()
     generateRandomMeme()
+
+    var filterInput = document.querySelector('#gallery-filter')
+    filterInput.oninput = function() {
+        renderGallery()
+    }
 }
 
 function handleTextInput() {
@@ -38,15 +48,16 @@ function changeFontSize(action) {
     renderMeme()
 }
 
-function downloadMeme() {
-    const elGalleryContainer = document.querySelector('.image-gallery')
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
+    renderMeme()
+}
 
-    html2canvas(elGalleryContainer).then(function(canvas) {
-        const link = document.createElement('a')
-        link.download = 'meme.png'
-        link.href = canvas.toDataURL('image/png')
-        link.click()
-    })
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
 }
 
 function nextLine() {
@@ -64,17 +75,14 @@ function nextLine() {
 function deleteLine() {
     const meme = getMeme()
     if (meme.lines.length === 0) return
-
     meme.lines.splice(meme.selectedLineIdx, 1)
     meme.selectedLineIdx = Math.max(0, meme.selectedLineIdx - 1)
     setMeme(meme)
     renderMeme()
 }
 
-
 function detectTextClick(x, y) {
     const lines = document.querySelectorAll('.image-gallery div')
-
     lines.forEach((lineElement, index) => {
         const rect = lineElement.getBoundingClientRect()
         if (
@@ -88,29 +96,30 @@ function detectTextClick(x, y) {
     })
 }
 
+
 function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
-
     const meme = getMeme()
     const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
 
     const linesHtml = meme.lines.map((line, index) => `
         <div data-index="${index}" style="
-            position: absolute; 
-            left: ${line.x || 50}%; 
-            top: ${line.y || 50}%; 
-            transform: translate(-50%, -50%); 
-            font-size: ${line.size}px; 
+            position: absolute;
+            left: ${line.x || 50}%;
+            top: ${line.y || 50}%;
+            transform: translate(-50%, -50%);
+            font-size: ${line.size}px;
             color: ${line.color};
-            font-family: ${line.fontFamily || 'Arial'}; 
+            font-family: ${line.fontFamily || 'Arial'};
             text-align: ${line.align || 'center'};
             white-space: nowrap;
             border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'};
-            padding: 2px; 
+            padding: 2px;
         ">
             ${line.txt}
         </div>
     `).join('')
+
 
     const imgHtml = `
         <div style="position: relative; display: inline-block;">
@@ -129,41 +138,32 @@ function renderMeme() {
     })
 }
 
+ 
 function addLine() {
-    const meme = getMeme()
+    const meme = getMeme();
     const newLine = {
-      txt: 'Add Here New Text',    // Default text for the new line
-      size: 20,                   // Default size
-      color: 'blue',             // Default color
-      x: 30,                    // Default horizontal position (center)
-      y: 30                    // Default vertical position (center)
-    }
-  
+        txt: 'Add Here New Text',
+        size: 20,
+        color: 'blue',
+        x: 30,
+        y: 30
+    };
+
     meme.lines.push(newLine)
     meme.selectedLineIdx = meme.lines.length - 1
     setMeme(meme)
     renderMeme()
 }
+ 
 
-  function changeTextAlign(alignment) {
-
-    const meme = getMeme()
+function changeTextAlign(alignment) {
+    const meme = getMeme();
     if (!['left', 'center', 'right'].includes(alignment)) {
         console.error('Invalid alignment value')
         return
     }
-    const stepSize = 5
 
-    if (alignment === 'left') {
-        meme.lines[meme.selectedLineIdx].x = (meme.lines[meme.selectedLineIdx].x || 50) - stepSize
-    } else if (alignment === 'right') {
-        meme.lines[meme.selectedLineIdx].x = (meme.lines[meme.selectedLineIdx].x || 50) + stepSize
-    } else if (alignment === 'center') {
-        meme.lines[meme.selectedLineIdx].x = 50
-    }
-
-    meme.lines[meme.selectedLineIdx].x = Math.max(0, Math.min(100, meme.lines[meme.selectedLineIdx].x))
-
+    meme.lines[meme.selectedLineIdx].align = alignment
     setMeme(meme)
     renderMeme()
 }
@@ -171,17 +171,19 @@ function addLine() {
 function updateEditor() {
     const meme = getMeme()
     const selectedLine = meme.lines[meme.selectedLineIdx]
-    
     if (selectedLine) {
         document.querySelector('.meme-text').value = selectedLine.txt
     }
 }
+ 
 
 function handleLineClick(index) {
     setActiveLine(index)
     updateEditor()
+
 }
 
+ 
 function generateRandomMeme() {
     const randomImg = gImgs[Math.floor(Math.random() * gImgs.length)]
     const newMeme = {
@@ -190,12 +192,12 @@ function generateRandomMeme() {
         lines: [
             {
                 txt: 'Your text here',
-                size: 20,             
-                color: 'black',       
-                x: 50,                
-                y: 50,                
-                fontFamily: 'Arial', 
-                align: 'center'     
+                size: 20,
+                color: 'black',
+                x: 50,
+                y: 50,
+                fontFamily: 'Arial',
+                align: 'center'
             }
         ]
     }
@@ -204,3 +206,4 @@ function generateRandomMeme() {
     switchToEditor()
 }
 
+ 

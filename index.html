@@ -21,12 +21,24 @@
             </nav>
         </div>
     </header>
-    <button class="flex-btn" onclick="generateRandomMeme()">Flex</button>
+
+    <section class="new-gallery">
+        <div id="gallery-filter-container">
+            <input type="text" id="gallery-filter" placeholder="Filter images...">
+            <datalist id="gallery-keywords"></datalist>
+        </div>
+        <section class="gallery">
+     
+        </section>
+    </section>
 
 
     <main>
         <section class="image-gallery"></section> 
         <section class="meme-editor">
+            <div class="canvas-container">
+                <canvas id="my-canvas"></canvas>
+            </div>
             <input type="text" class="meme-text" placeholder="Add Text Here" oninput="handleTextInput()">
             <section class="button-controls">
                 <button class="add-line-btn" onclick="addLine()">
@@ -40,8 +52,12 @@
                 </button>
             </section>
             <section class="font-size-controls">
-                <button class="font-size-btn-dcr" onclick="changeFontSize('decrease')">A -</button>
-                <button class="font-size-btn-inr" onclick="changeFontSize('increase')">A +</button>
+                <button class="font-size-btn-dcr" onclick="changeFontSize('decrease')">
+                    <img src="icon/decrease font - icon.png" alt="Align Left">
+                </button>
+                <button class="font-size-btn-inr" onclick="changeFontSize('increase')">
+                    <img src="icon/increase font - icon.png" alt="Align Left">
+                </button>
                 <button class="text-align-btn-left" onclick="changeTextAlign('left')">
                     <img src="icon/align-to-left.png" alt="Align Left">
                 </button>
@@ -62,14 +78,15 @@
                 </select>
             </section>
             <section class="download-save-section">
-                <a class="download-link" href="#" onclick="downloadMeme()">
+                <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">
                     <img src="icon/download.png" alt="Download Icon" class="download-icon">
+        
                 </a>
                 <a class="save-link" href="#" onclick="onSaveMeme()">
                     <img src="icon/save.png" alt="Save Meme Icon" class="save-icon">
                 </a>
             </section>
-            <!-- <div class="message-modal hidden">Saved Meme Successfully</div> -->
+            <div class="message-modal hidden">Saved Meme Successfully</div>
         </section>           
     </main>
     <section class="saved-page hidden">

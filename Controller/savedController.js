@@ -1,18 +1,19 @@
-// savedController.js
 'use strict'
+
+ 
 
 function onOpenSaved() {
     renderSavedMemes()
     switchToSaved()
 }
 
+ 
 function renderSavedMemes() {
     const savedMemes = getSavedMemes();
     const elSavedContainer = document.querySelector('.saved-container')
 
     const memesHtml = savedMemes.map((meme, idx) => {
         const lines = Array.isArray(meme.lines) ? meme.lines : []
-
         const linesHtml = lines.map((line) => `
             <div style="
                 position: absolute;
@@ -29,12 +30,10 @@ function renderSavedMemes() {
             </div>
         `).join('')
         const img = gImgs.find(img => img.id === meme.selectedImgId)
-
         if (!img) {
             console.log(`Image with id ${meme.selectedImgId} not found.`)
             return ''
         }
-
         return `
             <div style="position: relative; display: inline-block; margin: 10px;">
                 <img src="${img.url}" style="display: block;">
@@ -43,10 +42,10 @@ function renderSavedMemes() {
             </div>
         `
     }).join('')
-
     elSavedContainer.innerHTML = memesHtml
 }
 
+ 
 
 function editSavedMeme(idx) {
     const savedMemes = getSavedMemes()
@@ -55,15 +54,6 @@ function editSavedMeme(idx) {
     switchToEditor()
 }
 
-function switchToSaved() {
-    document.querySelector('.meme-editor').style.display = 'none'
-    document.querySelector('.saved-page').style.display = 'block'
-}
-
-function switchToEditor() {
-    document.querySelector('.meme-editor').style.display = 'block'
-    document.querySelector('.saved-page').style.display = 'none'
-}
 
 function editSavedMeme(idx) {
     const savedMemes = getSavedMemes()
@@ -71,6 +61,8 @@ function editSavedMeme(idx) {
     setMeme(meme)
     switchToEditor()
 }
+
+ 
 
 function saveMemeToStorage() {
     getMemeImage().then(dataUrl => {
@@ -84,14 +76,21 @@ function saveMemeToStorage() {
     })
 }
 
+ 
+
 function getMemeImage() {
     const elCanvas = document.querySelector('.image-gallery')
+
     return new Promise((resolve) => {
         html2canvas(elCanvas).then(canvas => {
             resolve(canvas.toDataURL('image/png'))
+
         })
+
     })
+
 }
+ 
 
 function onSaveMeme() {
     saveMemeToStorage()
@@ -99,4 +98,5 @@ function onSaveMeme() {
     setTimeout(() => {
         document.querySelector('.message-modal').classList.add('hidden')
     }, 2000)
+
 }

@@ -15,11 +15,6 @@ var gImgs = [
 
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
-function switchToSaved() {
-    document.querySelector('.meme-editor').style.display = 'none'
-    document.querySelector('.saved-page').style.display = 'block'
-}
-
 function onSaveMeme() {
     const meme = getMeme()
     const dataUrl = getMemeImage()

@@ -51,6 +51,7 @@ function setActiveLine(index) {
     renderMeme()
 }
 
+
 function setLineFontFamily(fontFamily) {
     const meme = getMeme()
     meme.lines[meme.selectedLineIdx].fontFamily = fontFamily
