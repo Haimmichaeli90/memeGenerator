@@ -9,8 +9,8 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var gImgs = [
-    { id: 1, url: 'img/1.jpeg', keywords: ['funny', 'cat'] },
-    { id: 2, url: 'img/2.jpeg', keywords: ['funny', 'Lady'] },
+    // { id: 1, url: 'img/1.jpeg', keywords: ['funny', 'cat'] },
+    { id: 1, url: 'img/2.jpeg', keywords: ['funny', 'Lady'] },
     { id: 3, url: 'img/3.jpeg', keywords: ['funny', 'sad'] },
     { id: 4, url: 'img/4.jpeg', keywords: ['funny', 'sad'] },
     { id: 5, url: 'img/5.jpeg', keywords: ['funny', 'sad'] },

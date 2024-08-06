@@ -134,7 +134,7 @@ function changeFontSize(action) {
     const meme = getMeme()
     const currentLine = meme.lines[meme.selectedLineIdx]
     if (action === 'increase') {
-        currentLine.size += 2
+        currentLine.size += 5
     } else if (action === 'decrease') {
         currentLine.size = Math.max(8, currentLine.size - 2)
     }
