@@ -1,70 +1,41 @@
 <!-- index.html -->
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title class"TitleColor">Meme Generator</title>
-
+    <title>Meme Generator</title>
     <link rel="stylesheet" href="main.css">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 </head>
-
 <body onload="onInit()">
-
     <header class="main-header">
-
         <div class="main-header-content">
-
             <h1 class="logo">Meme Gen</h1>
-
             <nav class="main-nav">
-
                 <ul class="main-nav-list">
-
                     <li><button class="nav-btn gallery-btn" onclick="onOpenGallery()">Gallery</button></li>
-
                     <li><button class="nav-btn saved-btn" onclick="onOpenSaved()">Saved</button></li>
-
                     <li><button class="nav-btn rand-btn" onclick="generateRandomMeme()">Randomize</button></li>
-
                 </ul>
-
             </nav>
-
         </div>
-
     </header>
 
- 
-
     <section class="new-gallery">
-
         <div id="gallery-filter-container">
-
             <input type="text" id="gallery-filter" placeholder="Filter images...">
-
             <datalist id="gallery-keywords"></datalist>
-
         </div>
-
-        <section class="gallery">
-
- 
-
-        </section>
-
+        <div>
+            <label for="image-upload" class="custom-file-upload">
+            <img src="icon/uplo2.jpeg" alt="Next Line" class="upload-img">
+            </label>
+            <input type="file" id="image-upload" accept="image/*" onchange="onImgInput(event)">
+            
+        </div>
+        <section class="gallery"></section>
     </section>
-
- 
 
     <main>
 
@@ -167,7 +138,7 @@
                 </button>
             </div>
             <div class="emoji-picker" style="display: none;">
-                <!-- Emoji buttons will be dynamically inserted here -->
+
             </div>
             <button class="save-link" onclick="toggleEmojiPicker()">
                 <img src="icon/smile.png" alt="emoji-picker">

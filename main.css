@@ -3,13 +3,9 @@
 }
 
 body {
-    background-image: url(img/bck.jpeg);
+    background-image: '';
     font-family: Arial, sans-serif;
     text-align: center;
-    background-size: cover; /* Cover the entire body */
-    background-repeat: no-repeat; /* Prevent repeating the image */
-    background-position: center; /* Center the image */
-
 }
 
 header {
@@ -290,6 +286,35 @@ main {
  
 
 
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0; 
+    border: none; 
+    margin-right: 80%;
+
+
+}
+#image-upload {
+    display: none; 
+}
+
+.upload-img {
+    margin-right: 40%;
+    width: 50%; 
+    height: auto; 
+    border-radius: 5px; 
+    transition: transform 0.2s; 
+}
+
+.custom-file-upload:hover .upload-img {
+    transform: scale(1.1); 
+}
+
+.custom-file-upload:active .upload-img {
+    transform: scale(0.9); 
+}
+
  
 
 .meme-editor {
@@ -301,11 +326,10 @@ main {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    /* background-color: coral; */
+    background-color: coral;
     border-radius: 1.875em;
     height: 500px;
     overflow-y: auto;
-    background-image: url(img/bck.jpeg);
 }
  
 .meme-canvas {
@@ -568,36 +592,147 @@ main {
 
 }
 
+ 
+
+
+ 
+
 .main-header {
+
+ 
+
     position: relative;
+
+ 
+
     display: grid;
+
+ 
+
     grid-template-columns: 20px minmax(260px, 1fr) 20px;
+
+ 
+
+
+ 
+
     grid-column: 1/-1;
+
+ 
+
     background-image: var(--clr-grad);
+
+ 
+
     margin-bottom: 10px;
+
+ 
+
 }
+
+ 
+
+
+ 
+
 .main-header-content {
+
+ 
+
     display: flex;
+
+ 
+
     justify-content: space-between;
+
+ 
+
     align-items: center;
+
+ 
+
+
+ 
+
     grid-column: 2;
+
+ 
+
     height: 70px;
+
+ 
+
 }
+
+ 
+
+
+ 
+
 .main-header .logo {
-  margin-inline-start: 10px;
-  font-size: 1.8em;
-  background-image: url(img/logo.jpeg);
-  border-radius: 10px;
+
+ 
+
+    margin-inline-start: 10px;
+
+ 
+
+    font-size: 1.8em;
+
+ 
+
 }
-.ain-nav-list {
+
+ 
+
+
+ 
+
+.main-nav-list {
+
+ 
+
     display: flex;
+
+ 
+
     margin: 0;
+
+ 
+
     padding: 0;
+
+ 
+
+
+ 
+
 }
+
+ 
+
+
+ 
+
 .main-nav-list li {
+
+ 
+
     display: inline;
+
+ 
+
     margin-right: 1rem;
+
+ 
+
 }
+
+ 
+
+
+ 
+
 .nav-btn {
 
  
@@ -705,9 +840,14 @@ main {
 
 }
 
-/* .main-header {
+ 
 
 
+ 
+
+.main-header {
+
+ 
 
     --clr-3: #19a59f;
 
@@ -767,47 +907,93 @@ main {
 
  
 
-} */
+}
+
+ 
+
+
+ 
 
 .font-size-controls {
+
     display: flex;
+
     gap: 0.1em;
+
     grid-template-columns: repeat(5, 1fr);
+
     background-color: #19a59f;
+
     border-radius: 15px;
+
     padding: 0.83em;
+
     margin-bottom: 0%;
+
     align-content: center;
+
     align-items: center;
+
     flex-direction: row;
+
 }
+
+ 
+
+ 
 
 .font-size-btn-dcr img,
+
 .font-size-btn-inr img {
+
     width: 30px;
+
     height: 30px;
+
     object-fit: contain;
+
     border: none;
+
     border-radius: 4px;
+
     background-color: #f0f0f0;
+
     border: 1px solid #ccc;
+
     display: block;
+
 }
 
+ 
+
 .font-size-btn-dcr,
+
 .font-size-btn-inr {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
+
     margin-right: 10px;
+
     border: none;
+
     background-color: transparent;
+
 }
+
+ 
+
 /* .font-size-btn-inr {
 
     margin-right: 0;
 
 } */
+
+ 
+
 .font-size-btn:hover {
 
  

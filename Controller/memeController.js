@@ -6,7 +6,7 @@ function renderMeme() {
     const gallery = document.querySelector('.image-gallery')
     const meme = getMeme()
     
-    const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
+    const selectedImg = meme.img ? { url: meme.img } : gImgs.find(img => img.id === meme.selectedImgId)
 
     const linesHtml = meme.lines.map((line, index) => `
         <div data-index="${index}" style="
@@ -66,6 +66,48 @@ function switchToEditor() {
     document.querySelector('.saved-page').style.display = 'none'
     document.querySelector('.image-gallery').style.display = 'block'
     document.querySelector('.new-gallery').style.display = 'none'
+
+    clearFileInput()
+}
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, function(elImg) {
+        const newMeme = {
+            selectedImgId: 'user-upload',
+            selectedLineIdx: 0,
+            lines: [
+                {
+                    txt: 'Your text here',
+                    size: 20,
+                    color: 'black',
+                    x: 50,
+                    y: 50,
+                    fontFamily: 'Arial',
+                    align: 'center',
+                    type: 'text'
+                }
+            ],
+            img: elImg.src 
+        }
+        setMeme(newMeme)
+        renderMeme()
+        switchToEditor()
+    })
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    reader.onload = function (event) {
+        let elImg = new Image()
+        elImg.src = event.target.result
+        elImg.onload = () => onImageReady(elImg)
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function clearFileInput() {
+    const fileInput = document.getElementById('image-upload')
+    fileInput.value = ''
 }
 
 function handleTextInput() {
