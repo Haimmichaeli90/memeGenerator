@@ -1,20 +1,71 @@
 'use strict'
 
-let gElCanvas
-let gCtx
+const ALIGNMENT_STEP = 1
 
-function onInit() {
-    gElCanvas = document.getElementById('my-canvas')
-    gCtx = gElCanvas.getContext('2d')
-    resizeCanvas()
-    renderMeme()
-    renderGallery()
-    generateRandomMeme()
+function renderMeme() {
+    const gallery = document.querySelector('.image-gallery')
+    const meme = getMeme()
+    
+    const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
 
-    var filterInput = document.querySelector('#gallery-filter')
-    filterInput.oninput = function() {
-        renderGallery()
+    const linesHtml = meme.lines.map((line, index) => `
+        <div data-index="${index}" style="
+            position: absolute;
+            left: ${line.x || 50}%;
+            top: ${line.y || 50}%;
+            transform: translate(-50%, -50%);
+            font-size: ${line.size}px;
+            color: ${line.color};
+            font-family: ${line.fontFamily || 'Arial'};
+            text-align: ${line.align || 'center'};
+            white-space: nowrap;
+            padding: 2px;
+            width: 90%;
+            box-sizing: border-box;
+            ${line.type === 'sticker' ? `font-size: ${line.size}px;` : ''}
+        " class="meme-line">
+            ${line.txt}
+        </div>
+    `).join('')
+
+    const imgHtml = `
+        <div style="position: relative; display: inline-block;" class="image-container">
+            <img src="${selectedImg.url}" style="display: block;">
+            ${linesHtml}
+        </div>
+    `
+    gallery.innerHTML = imgHtml
+    addDragListeners()
+}
+
+function generateRandomMeme() {
+    const randomImg = gImgs[Math.floor(Math.random() * gImgs.length)]
+    const newMeme = {
+        selectedImgId: randomImg.id,
+        selectedLineIdx: 0,
+        lines: [
+            {
+                txt: 'Your text here',
+                size: 20,
+                color: 'black',
+                x: 50,
+                y: 50,
+                fontFamily: 'Arial',
+                align: 'center',
+                type: 'text' 
+            }
+        ]
     }
+    setMeme(newMeme)
+    renderMeme()
+    switchToEditor()
+}
+
+function switchToEditor() {
+    document.querySelector('.meme-editor').style.display = 'block'
+    document.querySelector('.saved-page').style.display = 'none'
+    document.querySelector('.image-gallery').style.display = 'block'
+    document.querySelector('.new-gallery').style.display = 'none'
 }
 
 function handleTextInput() {
@@ -35,10 +86,11 @@ function handleColorChange() {
     }
 }
 
+ 
+
 function changeFontSize(action) {
     const meme = getMeme()
     const currentLine = meme.lines[meme.selectedLineIdx]
-
     if (action === 'increase') {
         currentLine.size += 2
     } else if (action === 'decrease') {
@@ -63,7 +115,6 @@ function downloadImg(elLink) {
 function nextLine() {
     const meme = getMeme()
     const linesCount = meme.lines.length
-
     if (linesCount > 0) {
         meme.selectedLineIdx = (meme.selectedLineIdx + 1) % linesCount
         setMeme(meme)
@@ -71,6 +122,8 @@ function nextLine() {
         updateEditor()
     }
 }
+
+ 
 
 function deleteLine() {
     const meme = getMeme()
@@ -80,6 +133,8 @@ function deleteLine() {
     setMeme(meme)
     renderMeme()
 }
+
+ 
 
 function detectTextClick(x, y) {
     const lines = document.querySelectorAll('.image-gallery div')
@@ -97,76 +152,41 @@ function detectTextClick(x, y) {
 }
 
 
-function renderMeme() {
-    const gallery = document.querySelector('.image-gallery')
-    const meme = getMeme()
-    const selectedImg = gImgs.find(img => img.id === meme.selectedImgId)
-
-    const linesHtml = meme.lines.map((line, index) => `
-        <div data-index="${index}" style="
-            position: absolute;
-            left: ${line.x || 50}%;
-            top: ${line.y || 50}%;
-            transform: translate(-50%, -50%);
-            font-size: ${line.size}px;
-            color: ${line.color};
-            font-family: ${line.fontFamily || 'Arial'};
-            text-align: ${line.align || 'center'};
-            white-space: nowrap;
-            border: ${meme.selectedLineIdx === index ? '2px solid white' : 'none'};
-            padding: 2px;
-        ">
-            ${line.txt}
-        </div>
-    `).join('')
-
-
-    const imgHtml = `
-        <div style="position: relative; display: inline-block;">
-            <img src="${selectedImg.url}" style="display: block;">
-            ${linesHtml}
-        </div>
-    `
-    gallery.innerHTML = imgHtml
-
-    gallery.addEventListener('click', function(event) {
-        const index = event.target.dataset.index
-        if (index) {
-            setActiveLine(Number(index))
-            updateEditor()
-        }
-    })
-}
-
- 
-function addLine() {
-    const meme = getMeme();
-    const newLine = {
-        txt: 'Add Here New Text',
-        size: 20,
-        color: 'blue',
-        x: 30,
-        y: 30
-    };
-
-    meme.lines.push(newLine)
-    meme.selectedLineIdx = meme.lines.length - 1
-    setMeme(meme)
-    renderMeme()
-}
- 
-
 function changeTextAlign(alignment) {
-    const meme = getMeme();
+    const meme = getMeme()
+    console.log('Changing text alignment to:', alignment)
     if (!['left', 'center', 'right'].includes(alignment)) {
         console.error('Invalid alignment value')
         return
     }
-
     meme.lines[meme.selectedLineIdx].align = alignment
     setMeme(meme)
     renderMeme()
 }
+
+// function moveText(direction) {
+
+//     const meme = getMeme()
+
+//     const selectedLine = meme.lines[meme.selectedLineIdx]
+
+//     if (!selectedLine) return
+
+ 
+
+//     const offsetX = direction === 'left' ? -ALIGNMENT_STEP : ALIGNMENT_STEP
+
+//     selectedLine.x += offsetX
+
+//     selectedLine.x = Math.max(0, Math.min(100, selectedLine.x))
+
+ 
+
+//     setMeme(meme)
+
+//     renderMeme();
+
+// }
 
 function updateEditor() {
     const meme = getMeme()
@@ -175,35 +195,54 @@ function updateEditor() {
         document.querySelector('.meme-text').value = selectedLine.txt
     }
 }
- 
 
 function handleLineClick(index) {
     setActiveLine(index)
     updateEditor()
-
 }
 
- 
-function generateRandomMeme() {
-    const randomImg = gImgs[Math.floor(Math.random() * gImgs.length)]
-    const newMeme = {
-        selectedImgId: randomImg.id,
-        selectedLineIdx: 0,
-        lines: [
-            {
-                txt: 'Your text here',
-                size: 20,
-                color: 'black',
-                x: 50,
-                y: 50,
-                fontFamily: 'Arial',
-                align: 'center'
-            }
-        ]
+function addLine() {
+    const meme = getMeme()
+    const newLine = {
+        txt: 'Add Here New Text',
+        size: 20,
+        color: 'blue',
+        x: 30,
+        y: 30,
+        type: 'text'
     }
-    setMeme(newMeme)
+    meme.lines.push(newLine)
+    meme.selectedLineIdx = meme.lines.length - 1
+    setMeme(meme)
     renderMeme()
-    switchToEditor()
 }
 
- 
+function addSticker(emoji) {
+    const meme = getMeme()
+    const newSticker = {
+        txt: emoji,
+        size: 40,
+        color: 'black',
+        x: 50,
+        y: 50,
+        type: 'sticker'
+    }
+    meme.lines.push(newSticker)
+    meme.selectedLineIdx = meme.lines.length - 1
+    setMeme(meme)
+    renderMeme()
+}
+
+function toggleEmojiPicker() {
+    const emojiPicker = document.querySelector('.emoji-picker');
+    emojiPicker.style.display = (emojiPicker.style.display === 'none') ? 'block' : 'none'
+}
+
+function createEmojiPicker() {
+    const emojiPicker = document.querySelector('.emoji-picker')
+    emojiPicker.innerHTML = emojis.map(emoji => `
+        <button onclick="addSticker('${String.fromCodePoint(emoji)}')">
+            ${String.fromCodePoint(emoji)}
+        </button>
+    `).join('')
+}

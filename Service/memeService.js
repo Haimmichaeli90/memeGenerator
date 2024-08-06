@@ -1,34 +1,32 @@
 'use strict'
 
+
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [
-        {
-            txt: 'I sometimes eat Falafel',
+    {
+        txt: 'I sometimes eat Falafel',
             size: 20,
             color: 'red',
-            x: 50, 
-            y: 50  
+            x: 50,
+            y: 50 
         },
         {
             txt: 'Do I Look Pretty Today?',
             size: 20,
             color: 'blue',
-            x: 50, 
-            y: 70  
+            x: 50,
+            y: 70 
         }
     ]
 }
 
-function getMeme() {
-    return gMeme
-}
+ 
 
 function setMeme(updatedMeme) {
     gMeme = updatedMeme
 }
-
 
 function setImg(imgId) {
     gMeme.selectedImgId = imgId
@@ -51,7 +49,6 @@ function setActiveLine(index) {
     renderMeme()
 }
 
-
 function setLineFontFamily(fontFamily) {
     const meme = getMeme()
     meme.lines[meme.selectedLineIdx].fontFamily = fontFamily
@@ -61,4 +58,17 @@ function setLineFontFamily(fontFamily) {
 
 function getSavedMemes() {
     return loadFromStorage('savedMemes') || []
+}
+
+function getMemeImage() {
+    const elCanvas = document.querySelector('.image-gallery div img')
+    return elCanvas
+}
+
+function getImgs() {
+    return  gImgs
+}
+
+function getMeme() {
+    return gMeme
 }

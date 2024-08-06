@@ -2,10 +2,10 @@
 
 function saveToStorage(key, val) {
     const valStr = JSON.stringify(val)
-    localStorage.setItem(key, valStr)
+    sessionStorage.setItem(key, valStr)
 }
 
 function loadFromStorage(key) {
-    const valStr = localStorage.getItem(key)
+    const valStr = sessionStorage.getItem(key)
     return JSON.parse(valStr)
 }
