@@ -780,6 +780,7 @@ main {
     align-content: center;
     align-items: center;
     flex-direction: row;
+    background-image: url(img/editor.jpeg);
 }
 
 .font-size-btn-dcr img,
@@ -1506,4 +1507,38 @@ main {
 
 .emoji-picker button:focus {
     outline: none; 
+}
+.keyword-search {
+    margin: 20px 0;
+    text-align: center;
+
+}
+
+.keyword-search h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#keyword-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.keyword {
+    font-size: 16px;
+    margin: 1px 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+}
+
+.keyword:hover {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.keyword.active {
+    font-size: 24px;
+    color: #007bff;
 }

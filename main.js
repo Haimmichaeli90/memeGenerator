@@ -9,20 +9,21 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var gImgs = [
-    // { id: 1, url: 'img/1.jpeg', keywords: ['funny', 'cat'] },
-    { id: 1, url: 'img/2.jpeg', keywords: ['funny', 'Lady'] },
-    { id: 3, url: 'img/3.jpeg', keywords: ['funny', 'sad'] },
-    { id: 4, url: 'img/4.jpeg', keywords: ['funny', 'sad'] },
-    { id: 5, url: 'img/5.jpeg', keywords: ['funny', 'sad'] },
-    { id: 6, url: 'img/6.jpeg', keywords: ['funny', 'sad'] },
-    { id: 7, url: 'img/7.jpeg', keywords: ['funny', 'sad'] },
-    { id: 8, url: 'img/8.jpeg', keywords: ['funny', 'sad'] },
-    { id: 9, url: 'img/9.jpeg', keywords: ['funny', 'sad'] },
-    { id: 10, url: 'img/10.jpeg', keywords: ['funny', 'sad'] },
-    { id: 11, url: 'img/11.jpeg', keywords: ['funny', 'sad'] },
-    { id: 12, url: 'img/12.jpeg', keywords: ['funny', 'sad'] },
-    { id: 13, url: 'img/13.jpeg', keywords: ['funny', 'sad'] },
-    { id: 14, url: 'img/14.jpeg', keywords: ['funny', 'sad'] },
+    { id: 1, url: 'img/1.jpeg', keywords: ['Bad', 'cat'] },
+    { id: 2, url: 'img/2.jpeg', keywords: ['Funny', 'funny'] },
+    { id: 3, url: 'img/3.jpeg', keywords: ['Funny', 'funny'] },
+    { id: 4, url: 'img/4.jpeg', keywords: ['Funny', 'animal'] },
+    { id: 5, url: 'img/5.jpeg', keywords: ['HAPPY', 'animal'] },
+    { id: 6, url: 'img/6.jpeg', keywords: ['HAPPY', 'Funny'] },
+    { id: 7, url: 'img/7.jpeg', keywords: ['HAPPY', 'animal'] },
+    { id: 8, url: 'img/8.jpeg', keywords: ['HAPPY', 'monkey'] },
+    { id: 9, url: 'img/9.jpeg', keywords: ['Funny', 'animal'] },
+    { id: 10, url: 'img/10.jpeg', keywords: ['Animal', 'cat'] },
+    { id: 11, url: 'img/11.jpeg', keywords: ['Animal', 'animal'] },
+    { id: 12, url: 'img/12.jpeg', keywords: ['exited', 'animal'] },
+    { id: 13, url: 'img/13.jpeg', keywords: ['Bad', 'animal'] },
+    { id: 14, url: 'img/14.jpeg', keywords: ['Animal', 'animal'] },
+    { id: 15, url: 'img/15.jpeg', keywords: ['Animal', 'animal'] },
 ]
 
 const emojis = [
@@ -46,6 +47,49 @@ function onInit() {
     }
 }
 
+function initGallery() {
+    createKeywordElements()
+    displayImages(gImgs)
+}
+
+function createKeywordElements() {
+    const keywordContainer = document.getElementById('keyword-container')
+    keywordContainer.innerHTML = Object.keys(gKeywordSearchCountMap).map(keyword => {
+        const count = gKeywordSearchCountMap[keyword]
+        const fontSize = Math.min(20 + count, 40)
+        return `
+            <span class="keyword" onclick="filterByKeyword('${keyword}')" style="font-size: ${fontSize}px;">
+                ${keyword}
+            </span>
+        `
+    }).join('')
+}
+
+function filterByKeyword(keyword) {
+    const filteredImgs = gImgs.filter(img => img.keywords.includes(keyword))
+    displayImages(filteredImgs)
+    highlightSelectedKeyword(keyword)
+}
+
+function displayImages(images) {
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = images.map(img => `
+        <div class="gallery-item">
+            <img src="${img.url}" alt="Image">
+        </div>
+    `).join('')
+}
+
+function highlightSelectedKeyword(selectedKeyword) {
+    const keywords = document.querySelectorAll('.keyword')
+    keywords.forEach(kw => {
+        if (kw.textContent === selectedKeyword) {
+            kw.classList.add('active')
+        } else {
+            kw.classList.remove('active')
+        }
+    })
+}
 function addDragListeners() {
     const lines = document.querySelectorAll('.meme-line')
 

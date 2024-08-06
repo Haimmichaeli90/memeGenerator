@@ -23,16 +23,24 @@
     </header>
 
     <section class="new-gallery">
+        <div class="keyword-search">
+            <div id="keyword-container">
+                <span class="keyword" onclick="filterByKeyword('Funny')">Funny</span>
+                <span class="keyword" onclick="filterByKeyword('Animal')">Animal</span>
+                <span class="keyword" onclick="filterByKeyword('Bad')">Bad</span>
+                <span class="keyword" onclick="filterByKeyword('HAPPY')">HAPPY</span>
+            </div>
+        </div>
         <div id="gallery-filter-container">
             <input type="text" id="gallery-filter" placeholder="Filter images...">
             <datalist id="gallery-keywords"></datalist>
         </div>
+      
         <div>
             <label for="image-upload" class="custom-file-upload">
-            <img src="icon/uplo2.jpeg" alt="Next Line" class="upload-img">
+                <img src="icon/uplo2.jpeg" alt="Next Line" class="upload-img">
             </label>
             <input type="file" id="image-upload" accept="image/*" onchange="onImgInput(event)">
-            
         </div>
         <section class="gallery"></section>
     </section>
