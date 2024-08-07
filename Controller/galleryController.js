@@ -37,7 +37,6 @@ function renderGallery() {
     `).join('')
     elGalleryContainer.innerHTML = strHtmls
 }
-
  
 
 function switchToGallery() {

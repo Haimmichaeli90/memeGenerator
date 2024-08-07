@@ -92,7 +92,6 @@ function onSaveMeme() {
     setTimeout(() => document.querySelector('.message-modal').style.display = 'none', 2000)
 }
 
-
 function onSaveMeme() {
     saveMemeToStorage()
     document.querySelector('.message-modal').classList.remove('hidden')
@@ -100,9 +99,7 @@ function onSaveMeme() {
         document.querySelector('.message-modal').classList.add('hidden')
     }, 2000)
 }
-
  
-
 function switchToSaved() {
     document.querySelector('.meme-editor').style.display = 'none'
     document.querySelector('.new-gallery').style.display = 'none'

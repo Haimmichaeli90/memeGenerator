@@ -9,21 +9,21 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 var gImgs = [
-    { id: 1, url: 'img/1.jpeg', keywords: ['Bad', 'cat'] },
-    { id: 2, url: 'img/2.jpeg', keywords: ['Funny', 'funny'] },
-    { id: 3, url: 'img/3.jpeg', keywords: ['Funny', 'funny'] },
-    { id: 4, url: 'img/4.jpeg', keywords: ['Funny', 'animal'] },
-    { id: 5, url: 'img/5.jpeg', keywords: ['HAPPY', 'animal'] },
-    { id: 6, url: 'img/6.jpeg', keywords: ['HAPPY', 'Funny'] },
-    { id: 7, url: 'img/7.jpeg', keywords: ['HAPPY', 'animal'] },
-    { id: 8, url: 'img/8.jpeg', keywords: ['HAPPY', 'monkey'] },
-    { id: 9, url: 'img/9.jpeg', keywords: ['Funny', 'animal'] },
-    { id: 10, url: 'img/10.jpeg', keywords: ['Animal', 'cat'] },
-    { id: 11, url: 'img/11.jpeg', keywords: ['Animal', 'animal'] },
-    { id: 12, url: 'img/12.jpeg', keywords: ['exited', 'animal'] },
-    { id: 13, url: 'img/13.jpeg', keywords: ['Bad', 'animal'] },
-    { id: 14, url: 'img/14.jpeg', keywords: ['Animal', 'animal'] },
-    { id: 15, url: 'img/15.jpeg', keywords: ['Animal', 'animal'] },
+    { id: 1, url: 'img/1.jpeg', keywords: ['excited', 'cat'] },
+    { id: 2, url: 'img/2.jpeg', keywords: ['Funny', 'lama'] },
+    { id: 3, url: 'img/3.jpeg', keywords: ['HAPPY', 'penguin'] },
+    { id: 4, url: 'img/4.jpeg', keywords: ['superAnimal', 'monkey'] },
+    { id: 5, url: 'img/5.jpeg', keywords: ['HAPPY', 'dog'] },
+    { id: 6, url: 'img/6.jpeg', keywords: ['superAnimal', 'cat'] },
+    { id: 7, url: 'img/7.jpeg', keywords: ['HAPPY', 'dog'] },
+    { id: 8, url: 'img/8.jpeg', keywords: ['Animal', 'monkey'] },
+    { id: 9, url: 'img/9.jpeg', keywords: ['Funny', 'cat'] },
+    { id: 10, url: 'img/10.jpeg', keywords: ['Funny', 'cat'] },
+    { id: 11, url: 'img/11.jpeg', keywords: ['superAnimal', 'raccoon'] },
+    { id: 12, url: 'img/12.jpeg', keywords: ['exited', 'giraffe'] },
+    { id: 13, url: 'img/13.jpeg', keywords: ['superAnimal', 'kangaroo'] },
+    { id: 14, url: 'img/14.jpeg', keywords: ['superAnimal', 'Elephant'] },
+    { id: 15, url: 'img/15.jpeg', keywords: ['Animal', 'rabbit'] },
 ]
 
 const emojis = [
@@ -54,15 +54,23 @@ function initGallery() {
 
 function createKeywordElements() {
     const keywordContainer = document.getElementById('keyword-container')
-    keywordContainer.innerHTML = Object.keys(gKeywordSearchCountMap).map(keyword => {
+    keywordContainer.innerHTML = ''
+    const keywords = []
+
+    for (let keyword in gKeywordSearchCountMap) {
+        keywords.push(keyword)
+    }
+
+    keywords.forEach(keyword => {
         const count = gKeywordSearchCountMap[keyword]
         const fontSize = Math.min(20 + count, 40)
-        return `
+        const keywordElement = `
             <span class="keyword" onclick="filterByKeyword('${keyword}')" style="font-size: ${fontSize}px;">
                 ${keyword}
             </span>
         `
-    }).join('')
+        keywordContainer.innerHTML += keywordElement
+    })
 }
 
 function filterByKeyword(keyword) {
@@ -134,6 +142,22 @@ function onUp() {
     document.body.style.cursor = 'grab'
 }
 
+function getEvPos(ev) {
+    let pos = {
+        x: ev.clientX,
+        y: ev.clientY,
+    }
+    if (TOUCH_EVS.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.clientX,
+            y: ev.clientY,
+        }
+    }
+    return pos
+}
+
 function moveLine(line, dx, dy) {
 
     const imgContainer = document.querySelector('.image-container')
@@ -146,24 +170,6 @@ function moveLine(line, dx, dy) {
     line.y = Math.max(0, Math.min(100, line.y + (dy / imgHeight) * 100))
 
     setMeme(getMeme())
-}
-
-
-function getEvPos(ev) {
-    let pos = {
-        x: ev.clientX,
-        y: ev.clientY,
-    }
-
-    if (TOUCH_EVS.includes(ev.type)) {
-        ev.preventDefault()
-        ev = ev.changedTouches[0]
-        pos = {
-            x: ev.clientX,
-            y: ev.clientY,
-        };
-    }
-    return pos
 }
 
 function onUploadImg() {

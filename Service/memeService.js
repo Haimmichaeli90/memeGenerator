@@ -1,6 +1,5 @@
 'use strict'
 
-
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
@@ -21,8 +20,6 @@ var gMeme = {
         }
     ]
 }
-
- 
 
 function setMeme(updatedMeme) {
     gMeme = updatedMeme
@@ -72,3 +69,4 @@ function getImgs() {
 function getMeme() {
     return gMeme
 }
+

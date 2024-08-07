@@ -46,11 +46,11 @@ function generateRandomMeme() {
         lines: [
             {
                 txt: 'Your text here',
-                size: 20,
-                color: 'black',
+                size: 50,
+                color: 'Yellow',
                 x: 50,
-                y: 50,
-                fontFamily: 'Arial',
+                y: 10,
+                fontFamily: 'Impact',
                 align: 'center',
                 type: 'text' 
             }
@@ -126,9 +126,7 @@ function handleColorChange() {
         setLineColor(newColor)
         renderMeme()
     }
-}
-
- 
+} 
 
 function changeFontSize(action) {
     const meme = getMeme()
@@ -142,18 +140,6 @@ function changeFontSize(action) {
     renderMeme()
 }
 
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
-    renderMeme()
-}
-
-function downloadImg(elLink) {
-    const imgContent = gElCanvas.toDataURL('image/jpeg')
-    elLink.href = imgContent
-}
-
 function nextLine() {
     const meme = getMeme()
     const linesCount = meme.lines.length
@@ -165,8 +151,6 @@ function nextLine() {
     }
 }
 
- 
-
 function deleteLine() {
     const meme = getMeme()
     if (meme.lines.length === 0) return
@@ -177,7 +161,6 @@ function deleteLine() {
 }
 
  
-
 function detectTextClick(x, y) {
     const lines = document.querySelectorAll('.image-gallery div')
     lines.forEach((lineElement, index) => {
@@ -205,30 +188,6 @@ function changeTextAlign(alignment) {
     setMeme(meme)
     renderMeme()
 }
-
-// function moveText(direction) {
-
-//     const meme = getMeme()
-
-//     const selectedLine = meme.lines[meme.selectedLineIdx]
-
-//     if (!selectedLine) return
-
- 
-
-//     const offsetX = direction === 'left' ? -ALIGNMENT_STEP : ALIGNMENT_STEP
-
-//     selectedLine.x += offsetX
-
-//     selectedLine.x = Math.max(0, Math.min(100, selectedLine.x))
-
- 
-
-//     setMeme(meme)
-
-//     renderMeme();
-
-// }
 
 function updateEditor() {
     const meme = getMeme()
@@ -276,7 +235,7 @@ function addSticker(emoji) {
 }
 
 function toggleEmojiPicker() {
-    const emojiPicker = document.querySelector('.emoji-picker');
+    const emojiPicker = document.querySelector('.emoji-picker')
     emojiPicker.style.display = (emojiPicker.style.display === 'none') ? 'block' : 'none'
 }
 
@@ -287,4 +246,16 @@ function createEmojiPicker() {
             ${String.fromCodePoint(emoji)}
         </button>
     `).join('')
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+    gElCanvas.width = elContainer.offsetWidth
+    gElCanvas.height = elContainer.offsetHeight
+    renderMeme()
+}
+
+function downloadImg(elLink) {
+    const imgContent = gElCanvas.toDataURL('image/jpeg')
+    elLink.href = imgContent
 }
